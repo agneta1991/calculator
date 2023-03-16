@@ -36,6 +36,10 @@ button {
     box-shadow: 5px 4px 4px rgba(0, 0, 0, 0.568);
 }
 
+button:hover{
+    box-shadow: 5px 4px 4px rgba(0, 0, 0, 0.247);
+}
+
 .buttonContainer {
     display: grid;
     grid-template-columns: repeat(4, 80px);
