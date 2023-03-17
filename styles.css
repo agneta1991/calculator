@@ -59,11 +59,15 @@ button:hover{
     border-radius: 10px;
 }
 
-.zero{
+#zero{
     grid-column-start: 1;
     grid-column-end: 3;
 }
 
 .display > div{
     padding: 10px;
+}
+
+.display > div > p{
+    text-align: end;
 }
