@@ -61,26 +61,29 @@ btn.forEach(individualBtn => {// to get an array of full numbers
         let b = fullNumArray[1];
         
 
-        let arrOperand = individualBtn.className;
-        if (arrOperand != 'number') {
-            operand = individualBtn.innerHTML;
+        let arrOperator = individualBtn.className;
+        if (arrOperator != 'number') {
+            operator = individualBtn.innerHTML;
         }
 
-        console.log(operand);
+        console.log(operator);
 
-        if (operand ==='+'){
+        if (operator ==='+'){
             add(a,b);
-        } else if(operand === '-'){
+        } else if(operator === '-'){
             subtract(a,b);
-        } else if (operand === '*'){
+        } else if (operator === '*'){
             multiply(a,b);
-        } else if (operand === '/'){
+        } else if (operator === '/'){
             divide(a,b);
-        }else if(operand ==='%'){
+        }else if(operator ==='%'){
             percent(a, b);
-        } else if(operand === '='){
+        } else if(operator === '='){
             topDisplay.innerHTML=bottomDisplay.innerHTML;
             bottomDisplay.innerHTML='';
+        } else if (operator === 'DEL'){
+            topDisplay.innerHTML = topDisplay.innerHTML.slice(0,-4);
+            
         }
 
 
