@@ -40,18 +40,22 @@ function divide(a, b) {
     bottomDisplay.innerHTML = ans;
 }
 
-function percent (a, b){
-    ans = (~~a / ~~b)*100;
+function percent (a,b){
+    ans = (~~a / 100)*~~b;
+    bottomDisplay.innerHTML = ans;
 }
+
+
+
 
 
 
 btn.forEach(individualBtn => {// to get an array of full numbers
     individualBtn.addEventListener('click', array);
     function array() {
-        let splitting = topDisplay.innerHTML;
-        let fullNumArray = splitting.split(/[-+*/%=]/);
-        console.log(fullNumArray); //separate numbers of an array
+        let top = topDisplay.innerHTML;
+        let fullNumArray = top.split(/[-+*/%=]/);
+        console.log(fullNumArray); //separated numbers in an array
 
         let a = fullNumArray[0];
         let b = fullNumArray[1];
@@ -73,17 +77,20 @@ btn.forEach(individualBtn => {// to get an array of full numbers
         } else if (operand === '/'){
             divide(a,b);
         }else if(operand ==='%'){
-            percent(a,b);
+            percent(a, b);
         } else if(operand === '='){
             topDisplay.innerHTML=bottomDisplay.innerHTML;
             bottomDisplay.innerHTML='';
         }
+
+
+for (i = 1; i< fullNumArray.length; i++){
+    if (i==2){
+        topDisplay.innerHTML=bottomDisplay.innerHTML;
+        bottomDisplay.innerHTML='';
+    }
+}
     }
 
 
     });
-
-
-//to figure out...
-//if operand is + then (array[0] + array[1])=array[0]
-//bottomDisplay.innerHTML = array[0]

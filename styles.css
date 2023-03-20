@@ -71,3 +71,9 @@ button:hover{
 .display > div > p{
     text-align: end;
 }
+
+#displayTwo{
+    font-size: 30px;
+    font-weight: bold;
+    line-height: 15%;
+}
