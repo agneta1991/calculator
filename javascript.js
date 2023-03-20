@@ -80,12 +80,10 @@ btn.forEach(individualBtn => {// to get an array of full numbers
             percent(a, b);
         } else if(operator === '='){
             topDisplay.innerHTML=bottomDisplay.innerHTML;
-            bottomDisplay.innerHTML='';
         } else if (operator === 'DEL'){
             topDisplay.innerHTML = topDisplay.innerHTML.slice(0,-4);
             
         }
-
 
 for (i = 1; i< fullNumArray.length; i++){
     if (i==2){
