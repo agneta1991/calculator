@@ -8,68 +8,20 @@ function refresh() {
 }
 
 
-function add(a, b) {
-    ans = parseFloat(a) + parseFloat(b);
-    console.log(ans);
-    bottomDisplay.innerHTML = ans;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
-    }
-}
-
-
-function subtract(a, b) {
-    ans = parseFloat(a) - parseFloat(b)
-    bottomDisplay.innerHTML = ans;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
-    }
-}
-
-
-function multiply(a, b) {
-    ans = parseFloat(a) * parseFloat(b);
-    bottomDisplay.innerHTML = ans;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
-    }
-}
-
-
-function divide(a, b) {
-    ans = a / b;
-    bottomDisplay.innerHTML = ans;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
-    }
-}
-
-function percent(a, b) {
-    ans = ((parseFloat(a) / 100) * parseFloat(b)).toFixed(2);
-    bottomDisplay.innerHTML = ans;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
-    }
-}
-
-function equal() {
-
-}
-
-
-
 
 btn.forEach(individualBtn => {
     individualBtn.addEventListener('click', array);
     function array() {
 
+        
         topDisplay.innerHTML += individualBtn.innerHTML;
 
         let num = topDisplay.innerHTML.split(/[-+*/%=]/);
         console.log(num);
         let a = num[0];
         let b = num[1];
-
+        
+        
         let arrOperator = individualBtn.className;
 
 
@@ -84,62 +36,72 @@ btn.forEach(individualBtn => {
                 return parseFloat(accumulator) + parseFloat(currentValue);
             }, 0);
             bottomDisplay.innerHTML = sum;
+            
             console.log(sum);
-            if (sum > 0) {
-                topDisplay.innerHTML = sum;
+            console.log(num.length);
+            
+            if (bottomDisplay.innerHTML === 'NaN') {
+                bottomDisplay.innerHTML = '';
             }
+         
+           if (num.length === 3){
+            topDisplay.innerHTML = parseFloat(a)+parseFloat(b);
+           }
+
+
+        } else if (operator === '-') {
+
+            let subtraction = num.reduce((accumulator, currentValue) =>
+                parseFloat(accumulator) - parseFloat(currentValue));
+
+            bottomDisplay.innerHTML = subtraction.toFixed(2);
+            console.log(subtraction);
+
+            if (bottomDisplay.innerHTML === 'NaN') {
+                bottomDisplay.innerHTML = '';
+            }
+           
+
+        } else if (operator === '*') {
+
+            let multiplying = num.reduce((accumulator, currentValue) =>
+                parseFloat(accumulator) * parseFloat(currentValue));
+
+            bottomDisplay.innerHTML = multiplying.toFixed(2);
+            console.log(multiplying);
+
+
             if (bottomDisplay.innerHTML === 'NaN') {
                 bottomDisplay.innerHTML = '';
             }
 
-
-        } else if (operator === '-') {
-            let subtraction = num.reduce((accumulator, currentValue) =>
-                parseFloat(accumulator) - parseFloat(currentValue));
-            bottomDisplay.innerHTML = subtraction;
-            console.log(subtraction);
-            if (subtraction > 0) {
-                topDisplay.innerHTML = subtraction;
-            }
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
-            }
-
-        } else if (operator === '*') {
-            let multiplying = num.reduce((accumulator, currentValue) =>
-                parseFloat(accumulator) * parseFloat(currentValue));
-            bottomDisplay.innerHTML = multiplying;
-            console.log(multiplying);
-            if (multiplying > 0) {
-                topDisplay.innerHTML = multiplying;
-            }
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
-            }
         } else if (operator === '/') {
+
             let division = num.reduce((accumulator, currentValue) =>
                 parseFloat(accumulator) / parseFloat(currentValue));
-            bottomDisplay.innerHTML = division;
+
+            bottomDisplay.innerHTML = division.toFixed(2);
             console.log(division);
-            if (division > 0) {
-                topDisplay.innerHTML = division;
-            }
+
+
             if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
+                bottomDisplay.innerHTML = '';
             }
         } else if (operator === '%') {
-            let percentBtn = num.reduce((accumulator, currentValue) =>
-                (parseFloat(accumulator) / 100) * parseFloat(currentValue)).toFixed(2)
-            bottomDisplay.innerHTML = percentBtn;
+
+            let percentBtn = (a / 100) * b;
+
+            bottomDisplay.innerHTML = percentBtn.toFixed(2);
             console.log(percentBtn);
-            if (percentBtn > 0) {
-                topDisplay.innerHTML = percentBtn;
-            }
+
+          
             if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
+                bottomDisplay.innerHTML = '';
             }
+
         } else if (operator === '=') {
-            topDisplay.innerHTML = '';
+            topDisplay.innerHTML = bottomDisplay.innerHTML;
+            bottomDisplay.innerHTML = '';
         }
 
 
@@ -152,6 +114,7 @@ let del = document.getElementById('delete');
 del.addEventListener('click', dele);
 function dele() {
     topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -4);
+    bottomDisplay.innerHTML = '';
 }
 
 ////////////////////////////////////////////////////////////////////////////////////
