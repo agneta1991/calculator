@@ -3,119 +3,118 @@ let topDisplay = document.getElementById('displayOne');
 let bottomDisplay = document.getElementById('displayTwo');
 
 
+
 function refresh() {
     location.reload();
 }
 
+function add(a, b) {
+    answer = parseFloat(a) + parseFloat(b);
+    bottomDisplay.innerHTML = answer;
+    if (bottomDisplay.innerHTML === 'NaN') {
+        bottomDisplay.innerHTML = '';
+    }
+}
 
+function subtract(a, b) {
+    answer = parseFloat(a) - parseFloat(b);
+    bottomDisplay.innerHTML = answer;
+    if (bottomDisplay.innerHTML === 'NaN') {
+        bottomDisplay.innerHTML = '';
+    }
+}
+
+function multiply(a, b) {
+    answer = parseFloat(a) * parseFloat(b);
+    bottomDisplay.innerHTML = answer;
+    if (bottomDisplay.innerHTML === 'NaN') {
+        bottomDisplay.innerHTML = '';
+    }
+}
+
+function divide(a, b) {
+    answer = parseFloat(a) / parseFloat(b);
+    bottomDisplay.innerHTML = answer;
+    if (bottomDisplay.innerHTML === 'NaN') {
+        bottomDisplay.innerHTML = '';
+    }
+}
+
+function percent(a, b) {
+    answer = (parseFloat(a) / 100) * parseFloat(b);
+    bottomDisplay.innerHTML = answer;
+    
+}
+
+function equal() {
+    topDisplay.innerHTML = answer;
+    bottomDisplay.innerHTML = '';
+}
 
 btn.forEach(individualBtn => {
     individualBtn.addEventListener('click', array);
     function array() {
 
-        
-        topDisplay.innerHTML += individualBtn.innerHTML;
 
-        let num = topDisplay.innerHTML.split(/[-+*/%=]/);
+        topDisplay.innerHTML += individualBtn.innerHTML;
+        let num = topDisplay.innerHTML.split(/[/*+=%-]/g)
+        let operatorArray = topDisplay.innerHTML.split(/[0-9]/g);
+        console.log(operatorArray);
+        
+
         console.log(num);
         let a = num[0];
         let b = num[1];
-        
-        
-        let arrOperator = individualBtn.className;
+        let operatorName = individualBtn.className
 
 
-        if (arrOperator != 'number') {
-            operator = individualBtn.innerHTML;
-        }
-
-
-
-        if (operator === '+') {
-            let sum = num.reduce((accumulator, currentValue) => {
-                return parseFloat(accumulator) + parseFloat(currentValue);
-            }, 0);
-            bottomDisplay.innerHTML = sum;
-            
-            console.log(sum);
-            console.log(num.length);
-            
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = '';
+        if (operatorName === 'add') {
+            add(a, b);
+            if (num.length > 2) {
+                let y = operatorArray.pop();
+                let newArr = answer + y;
+                topDisplay.innerHTML = newArr;
+            } 
+        } else if (operatorName === 'subtract') {
+            subtract(a, b);
+            if (num.length > 2) {
+                let y = operatorArray.pop();
+                let newArr = answer + y;
+                topDisplay.innerHTML = newArr;
             }
-         
-           if (num.length === 3){
-            topDisplay.innerHTML = parseFloat(a)+parseFloat(b);
-           }
-
-
-        } else if (operator === '-') {
-
-            let subtraction = num.reduce((accumulator, currentValue) =>
-                parseFloat(accumulator) - parseFloat(currentValue));
-
-            bottomDisplay.innerHTML = subtraction.toFixed(2);
-            console.log(subtraction);
-
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = '';
+        } else if (operatorName === 'multiply') {
+            multiply(a, b);
+            if (num.length > 2) {
+                let y = operatorArray.pop();
+                topDisplay.innerHTML = answer + y;
             }
-           
-
-        } else if (operator === '*') {
-
-            let multiplying = num.reduce((accumulator, currentValue) =>
-                parseFloat(accumulator) * parseFloat(currentValue));
-
-            bottomDisplay.innerHTML = multiplying.toFixed(2);
-            console.log(multiplying);
-
-
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = '';
+        } else if (operatorName === 'divide') {
+            divide(a, b);
+            if (num.length > 2) {
+                let y = operatorArray.pop();
+                topDisplay.innerHTML = answer + y;
             }
-
-        } else if (operator === '/') {
-
-            let division = num.reduce((accumulator, currentValue) =>
-                parseFloat(accumulator) / parseFloat(currentValue));
-
-            bottomDisplay.innerHTML = division.toFixed(2);
-            console.log(division);
-
-
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = '';
-            }
-        } else if (operator === '%') {
-
-            let percentBtn = (a / 100) * b;
-
-            bottomDisplay.innerHTML = percentBtn.toFixed(2);
-            console.log(percentBtn);
-
-          
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = '';
-            }
-
-        } else if (operator === '=') {
-            topDisplay.innerHTML = bottomDisplay.innerHTML;
-            bottomDisplay.innerHTML = '';
-        }
-
-
+        } else if (operatorName === 'percent') {
+            percent(a,b); 
+            if (num.length > 2) {
+                topDisplay.innerHTML = answer;
+            } 
+        }else if (operatorName === 'equal') {
+            equal();
+        };
     }
 
 
-});
-
+    }
+)
 let del = document.getElementById('delete');
 del.addEventListener('click', dele);
 function dele() {
     topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -4);
     bottomDisplay.innerHTML = '';
 }
+
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////KRYBOARD CODE////////////////////////////////////////////
@@ -147,3 +146,4 @@ function array() {
         divide(a, b);
     }
 }
+

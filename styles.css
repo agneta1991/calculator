@@ -77,3 +77,8 @@ button:hover{
     font-weight: bold;
     line-height: 15%;
 }
+
+.disabled{
+    background-color: rgba(0, 0, 0, 0.562);
+    color: rgba(0, 0, 0, 0.562);
+}
