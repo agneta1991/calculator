@@ -72,8 +72,7 @@ btn.forEach(individualBtn => {
 
         switch (operatorName) {
             case 'add':
-                if (topDisplay.innerHTML.includes('+')){
-                add(a, b);}
+                add(a, b);
                 if (num.length > 2) {
                     let y = operatorArray.pop();
                     let newArr = answer + y;
