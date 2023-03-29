@@ -1,134 +1,79 @@
-let btn = document.querySelectorAll('button');
 let topDisplay = document.getElementById('displayOne');
 let bottomDisplay = document.getElementById('displayTwo');
+let btn = document.querySelectorAll('button');
 
-function refresh() {
-    location.reload();
-}
 
-function add(a, b) {
-    answer = parseFloat(a) + parseFloat(b);
-    bottomDisplay.innerHTML = answer;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = '';
-    }
-    return answer;
-}
-
-function subtract(a, b) {
-    answer = parseFloat(a) - parseFloat(b);
-    bottomDisplay.innerHTML = answer;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = '';
-    }
-}
-
-function multiply(a, b) {
-    answer = parseFloat(a) * parseFloat(b);
-    bottomDisplay.innerHTML = answer;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = '';
-    }
-}
-
-function divide(a, b) {
-    answer = parseFloat(a) / parseFloat(b);
-    bottomDisplay.innerHTML = answer;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = '';
-    }
-}
-
-function percent(a, b) {
-    answer = (parseFloat(a) / 100) * parseFloat(b);
-    bottomDisplay.innerHTML = answer;
-
-}
-
-function equal(a, b) {
-    answer=
-    bottomDisplay.innerHTML=answer;
-    if (bottomDisplay.innerHTML === 'NaN') {
-        bottomDisplay.innerHTML = '';
-    }
-    
-}
 
 btn.forEach(individualBtn => {
     individualBtn.addEventListener('click', array);
-
-
     function array() {
+
         topDisplay.innerHTML += individualBtn.innerHTML;
 
-        let num = topDisplay.innerHTML.split(/[/*+=%-]/g)
-        let operatorArray = topDisplay.innerHTML.split(/[0-9]/g);
-        console.log(num, operatorArray);
-        
+        let numbers = topDisplay.innerHTML.split(/[/*+=%-]/g);
+        let operators = topDisplay.innerHTML.split((/[0123456789]/g));
+        let operatorArray = operators.filter(notNull);
 
-        let a = num[0];
-        let b = num[1];
-        let operatorName = individualBtn.className;
-
-        switch (operatorName) {
-            case 'add':
-                add(a, b);
-                if (num.length > 2) {
-                    let y = operatorArray.pop();
-                    let newArr = answer + y;
-                    topDisplay.innerHTML = newArr;
-                
-                } break;
-
-            case 'subtract':
-                subtract(a, b);
-                if (num.length > 2) {
-                    let y = operatorArray.pop();
-                    let newArr = answer + y;
-                    topDisplay.innerHTML = newArr;
-                }
-                break;
-
-            case 'multiply':
-                multiply(a, b);
-                if (num.length > 2) {
-                    let y = operatorArray.pop();
-                    topDisplay.innerHTML = answer + y;
-                }
-                break;
-
-            case 'divide':
-                divide(a, b);
-                if (num.length > 2) {
-                    let y = operatorArray.pop();
-                    topDisplay.innerHTML = answer + y;
-                }
-                break;
-
-            case 'percent':
-                percent(a, b);
-                if (num.length > 2) {
-                    topDisplay.innerHTML = answer;
-                }
-                break;
-
-            case 'equal':
-                equal(a,b);
-                
-                break;
+        function notNull(oper) {
+            return oper != '' && oper != 'undefine' && oper != '.';
         }
-    }
+        console.log(operatorArray);
+
+        let a = numbers[0];
+        let b = numbers[1];
+        let operator = operatorArray[0];
+        console.log(operatorArray.length);
+        
+        
+        if (operator === '+') {
+            let answer = parseFloat(a) + parseFloat(b);
+            console.log(answer);
+
+            numbers.splice(0, 2);
+            operatorArray.splice(0, 1);
+            numbers.unshift(answer);
 
 
-}
-)
-let del = document.getElementById('delete');
-del.addEventListener('click', dele);
-function dele() {
-    topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -4);
-    bottomDisplay.innerHTML = '';
-}
+            console.log(numbers);
+            console.log(operatorArray);
 
+        } else if (operator === '-') {
+            let answer = parseFloat(a) - parseFloat(b);
+            console.log(answer);
+
+            numbers.splice(0, 2);
+            operatorArray.splice(0, 1);
+            numbers.unshift(answer);
+
+            console.log(numbers);
+            console.log(operatorArray);
+
+        } else if (operator === '*') {
+            let answer = parseFloat(a) * parseFloat(b);
+            console.log(answer);
+
+            numbers.splice(0, 2);
+            operatorArray.splice(0, 1);
+            numbers.unshift(answer);
+
+            console.log(numbers);
+            console.log(operatorArray);
+
+        } else if (operator === '/') {
+            let answer = parseFloat(a) + parseFloat(b);
+            console.log(answer);
+
+            numbers.splice(0, 2);
+            operatorArray.splice(0, 1);
+            numbers.unshift(answer);
+
+            console.log(numbers);
+            console.log(operatorArray);
+        }
+
+
+    };
+});
 
 
 ////////////////////////////////////////////////////////////////////////////////////
