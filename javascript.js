@@ -22,7 +22,6 @@ btn.forEach(individualBtn => {
         let a = numbers[0];
         let b = numbers[1];
         let operator = operatorArray[0];
-        console.log(operatorArray.length);
         
         
         if (operator === '+') {
@@ -31,7 +30,7 @@ btn.forEach(individualBtn => {
 
             numbers.splice(0, 2);
             operatorArray.splice(0, 1);
-            numbers.unshift(answer);
+            numbers.unshift(answer.toString());
 
 
             console.log(numbers);
