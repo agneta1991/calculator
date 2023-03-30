@@ -8,8 +8,14 @@ btn.forEach(individualBtn => {
     individualBtn.addEventListener('click', array);
     function array() {
 
-        topDisplay.innerHTML += individualBtn.innerHTML;
+        if(topDisplay.innerHTML.length >= 20){
+            topDisplay.innerHTML='';
+            bottomDisplay.innerHTML = 'Number is too long';
+        };
 
+
+        topDisplay.innerHTML += individualBtn.innerHTML;
+        console.log(topDisplay.innerHTML.split());
         let numbers = topDisplay.innerHTML.split(/[/*+=%-]/g);
         let operators = topDisplay.innerHTML.split((/[0123456789]/g));
         let operatorArray = operators.filter(notNull);
@@ -31,11 +37,11 @@ btn.forEach(individualBtn => {
             }
 
             console.log(numbers);
-            if(operatorArray.length >= 2){
+            if (operatorArray.length >= 2) {
                 let y = operatorArray.pop();
                 topDisplay.innerHTML = bottomDisplay.innerHTML + y;
             };
-            
+
 
         } else if (operator === '-') {
             let answer = parseFloat(a) - parseFloat(b);
@@ -45,7 +51,7 @@ btn.forEach(individualBtn => {
             }
 
             console.log(numbers);
-            if(operatorArray.length >= 2){
+            if (operatorArray.length >= 2) {
                 let y = operatorArray.pop();
                 topDisplay.innerHTML = bottomDisplay.innerHTML + y;
             };
@@ -58,7 +64,7 @@ btn.forEach(individualBtn => {
             }
 
             console.log(numbers);
-            if(operatorArray.length >= 2){
+            if (operatorArray.length >= 2) {
                 let y = operatorArray.pop();
                 topDisplay.innerHTML = bottomDisplay.innerHTML + y;
             };
@@ -72,7 +78,7 @@ btn.forEach(individualBtn => {
             }
 
             console.log(numbers);
-            if(operatorArray.length >= 2){
+            if (operatorArray.length >= 2) {
                 let y = operatorArray.pop();
                 topDisplay.innerHTML = bottomDisplay.innerHTML + y;
             };
@@ -85,10 +91,10 @@ btn.forEach(individualBtn => {
             }
 
             console.log(numbers);
-            if(operatorArray.length >= 2){
-                
+            if (operatorArray.length >= 2) {
+
             };
-           
+
         };
     };
 });
@@ -102,8 +108,8 @@ function dele() {
 
 let result = document.getElementById('equal');
 result.addEventListener('click', equal);
-function equal(){
-    topDisplay.innerHTML=bottomDisplay.innerHTML;
+function equal() {
+    topDisplay.innerHTML = bottomDisplay.innerHTML;
     bottomDisplay.innerHTML = '';
 
 }
@@ -117,71 +123,71 @@ function refresh() {
 ////////////////////////////////////////////////////////////////////////////////////
 
 window.addEventListener('keypress', e => {
-    console.log(e);
+
     if (e.keyCode >= 112 || e.keyCode <= 95) {
         console.log(e.keyCode);
         topDisplay.innerHTML += e.key;
 
-        if (e.key === 'Enter'){
+        if (e.key === 'Enter') {
             topDisplay.innerHTML = bottomDisplay.innerHTML;
-            bottomDisplay.innerHTML='';
+            bottomDisplay.innerHTML = '';
         };
 
     }
 });
 
-window.addEventListener('keydown', function(event) {
+window.addEventListener('keypress', function (event) {
     let key = event.key;
-    if(key === 'Backspace' || key === 'Delete'){
-        topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
-    bottomDisplay.innerHTML = '';
+    if (key === 'Delete') {
+        topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -7);
+        bottomDisplay.innerHTML = '';
     };
+
+
 });
 
 window.addEventListener('keypress', keyArray);
 function keyArray() {
 
-    
+    let numbers = topDisplay.innerHTML.split(/[/*+=%-]/g);
+    let operators = topDisplay.innerHTML.split((/[0123456789]/g));
+    let operatorArray = operators.filter(notNull);
 
-        let numbers = topDisplay.innerHTML.split(/[/*+=%-]/g);
-        let operators = topDisplay.innerHTML.split((/[0123456789]/g));
-        let operatorArray = operators.filter(notNull);
+    function notNull(oper) {
+        return oper != '' && oper != 'undefine' && oper != '.' && oper != 'DEL';
+    }
+    console.log(operatorArray);
 
-        function notNull(oper) {
-            return oper != '' && oper != 'undefine' && oper != '.' && oper != 'DEL';
-        }
-        console.log(operatorArray);
+    let a = numbers[0];
+    let b = numbers[1];
 
-        let a = numbers[0];
-        let b = numbers[1];
-        
 
     if (keyCode = 107) {
         let answer = parseFloat(a) + parseFloat(b);
-            bottomDisplay.innerHTML = answer;
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = '';
-            }
+        bottomDisplay.innerHTML = answer;
+        if (bottomDisplay.innerHTML === 'NaN') {
+            bottomDisplay.innerHTML = '';
+        }
 
-            console.log(numbers);
-            if(operatorArray.length >= 2){
-                let y = operatorArray.pop();
-                topDisplay.innerHTML = bottomDisplay.innerHTML + y;
-            };
+        console.log(numbers);
+        if (operatorArray.length >= 2) {
+            let y = operatorArray.pop();
+            topDisplay.innerHTML = bottomDisplay.innerHTML + y;
+        };
 
     } else if (keyCode = 1095) {
         let answer = parseFloat(a) - parseFloat(b);
-            bottomDisplay.innerHTML = answer;
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = '';
-            }
+        bottomDisplay.innerHTML = answer;
+        if (bottomDisplay.innerHTML === 'NaN') {
+            bottomDisplay.innerHTML = '';
+        }
 
-            console.log(numbers);
-            if(operatorArray.length >= 2){
-                let y = operatorArray.pop();
-                topDisplay.innerHTML = bottomDisplay.innerHTML + y;
-            };
-            
+        console.log(numbers);
+        if (operatorArray.length >= 2) {
+            let y = operatorArray.pop();
+            topDisplay.innerHTML = bottomDisplay.innerHTML + y;
+        };
+
     } else if (keyCode = 106) {
         let answer = parseFloat(a) * parseFloat(b);
         bottomDisplay.innerHTML = answer;
@@ -190,33 +196,35 @@ function keyArray() {
         }
 
         console.log(numbers);
-        if(operatorArray.length >= 2){
+        if (operatorArray.length >= 2) {
             let y = operatorArray.pop();
             topDisplay.innerHTML = bottomDisplay.innerHTML + y;
         };
 
     } else if (keyCode = 111) {
         let answer = parseFloat(a) / parseFloat(b);
-            bottomDisplay.innerHTML = answer;
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = '';
-            }
+        bottomDisplay.innerHTML = answer;
+        if (bottomDisplay.innerHTML === 'NaN') {
+            bottomDisplay.innerHTML = '';
+        }
 
-            console.log(numbers);
-            if(operatorArray.length >= 2){
-                let y = operatorArray.pop();
-                topDisplay.innerHTML = bottomDisplay.innerHTML + y;
-            };
-    } else if (keyCode === 53 && shiftKey === 'true'){
+        console.log(numbers);
+        if (operatorArray.length >= 2) {
+            let y = operatorArray.pop();
+            topDisplay.innerHTML = bottomDisplay.innerHTML + y;
+        };
+    } else if (keyCode === 53 && shiftKey === 'true') {
         let answer = (parseFloat(a) / 100) * parseFloat(b);
-            bottomDisplay.innerHTML = answer.toFixed(2);
-            if (bottomDisplay.innerHTML === 'NaN') {
-                bottomDisplay.innerHTML = '';
-            }
+        bottomDisplay.innerHTML = answer.toFixed(2);
+        if (bottomDisplay.innerHTML === 'NaN') {
+            bottomDisplay.innerHTML = '';
+        }
+    };
 
-            console.log(numbers);
-            if(operatorArray.length >= 2){
-                
-            };
+
+
+    if(topDisplay.innerHTML.length >= 20){
+        topDisplay.innerHTML='';
+        bottomDisplay.innerHTML = 'Number is too long';
     };
 }
