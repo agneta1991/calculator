@@ -15,65 +15,95 @@ btn.forEach(individualBtn => {
         let operatorArray = operators.filter(notNull);
 
         function notNull(oper) {
-            return oper != '' && oper != 'undefine' && oper != '.';
+            return oper != '' && oper != 'undefine' && oper != '.' && oper != 'DEL';
         }
         console.log(operatorArray);
 
         let a = numbers[0];
         let b = numbers[1];
         let operator = operatorArray[0];
-        
-        
+
         if (operator === '+') {
             let answer = parseFloat(a) + parseFloat(b);
-            console.log(answer);
-
-            numbers.splice(0, 2);
-            operatorArray.splice(0, 1);
-            numbers.unshift(answer.toString());
-
+            bottomDisplay.innerHTML = answer;
+            if (bottomDisplay.innerHTML === 'NaN') {
+                bottomDisplay.innerHTML = '';
+            }
 
             console.log(numbers);
-            console.log(operatorArray);
+            if(operatorArray.length >= 2){
+                let y = operatorArray.pop();
+                topDisplay.innerHTML = bottomDisplay.innerHTML + y;
+            };
+            
 
         } else if (operator === '-') {
             let answer = parseFloat(a) - parseFloat(b);
-            console.log(answer);
-
-            numbers.splice(0, 2);
-            operatorArray.splice(0, 1);
-            numbers.unshift(answer);
+            bottomDisplay.innerHTML = answer;
+            if (bottomDisplay.innerHTML === 'NaN') {
+                bottomDisplay.innerHTML = '';
+            }
 
             console.log(numbers);
-            console.log(operatorArray);
+            if(operatorArray.length >= 2){
+                let y = operatorArray.pop();
+                topDisplay.innerHTML = bottomDisplay.innerHTML + y;
+            };
 
         } else if (operator === '*') {
             let answer = parseFloat(a) * parseFloat(b);
-            console.log(answer);
-
-            numbers.splice(0, 2);
-            operatorArray.splice(0, 1);
-            numbers.unshift(answer);
+            bottomDisplay.innerHTML = answer;
+            if (bottomDisplay.innerHTML === 'NaN') {
+                bottomDisplay.innerHTML = '';
+            }
 
             console.log(numbers);
-            console.log(operatorArray);
+            if(operatorArray.length >= 2){
+                let y = operatorArray.pop();
+                topDisplay.innerHTML = bottomDisplay.innerHTML + y;
+            };
+
 
         } else if (operator === '/') {
-            let answer = parseFloat(a) + parseFloat(b);
-            console.log(answer);
-
-            numbers.splice(0, 2);
-            operatorArray.splice(0, 1);
-            numbers.unshift(answer);
+            let answer = parseFloat(a) / parseFloat(b);
+            bottomDisplay.innerHTML = answer;
+            if (bottomDisplay.innerHTML === 'NaN') {
+                bottomDisplay.innerHTML = '';
+            }
 
             console.log(numbers);
-            console.log(operatorArray);
-        }
+            if(operatorArray.length >= 2){
+                let y = operatorArray.pop();
+                topDisplay.innerHTML = bottomDisplay.innerHTML + y;
+            };
 
+        } else if (operator === '%') {
+            let answer = (parseFloat(a) / 100) * parseFloat(b);
+            bottomDisplay.innerHTML = answer;
+            if (bottomDisplay.innerHTML === 'NaN') {
+                bottomDisplay.innerHTML = '';
+            }
 
+            console.log(numbers);
+            if(operatorArray.length >= 2){
+                let y = operatorArray.pop();
+                topDisplay.innerHTML = bottomDisplay.innerHTML + y;
+            };
+           
+        };
     };
 });
 
+let del = document.getElementById('delete');
+del.addEventListener('click', dele);
+function dele() {
+    topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -4);
+    bottomDisplay.innerHTML = '';
+}
+
+function refresh() {
+    location.reload();
+}
 
 ////////////////////////////////////////////////////////////////////////////////////
 ///////////////////////////KRYBOARD CODE////////////////////////////////////////////
