@@ -130,6 +130,14 @@ window.addEventListener('keypress', e => {
     }
 });
 
+window.addEventListener('keydown', function(event) {
+    let key = event.key;
+    if(key === 'Backspace' || key === 'Delete'){
+        topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -1);
+    bottomDisplay.innerHTML = '';
+    };
+});
+
 window.addEventListener('keypress', keyArray);
 function keyArray() {
 
