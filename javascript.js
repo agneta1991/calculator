@@ -8,8 +8,8 @@ btn.forEach(individualBtn => {
     individualBtn.addEventListener('click', array);
     function array() {
 
-        if(topDisplay.innerHTML.length >= 20){
-            topDisplay.innerHTML='';
+        if (topDisplay.innerHTML.length >= 20) {
+            topDisplay.innerHTML = '';
             bottomDisplay.innerHTML = 'Number is too long';
         };
 
@@ -71,8 +71,12 @@ btn.forEach(individualBtn => {
 
 
         } else if (operator === '/') {
-            let answer = parseFloat(a) / parseFloat(b);
-            bottomDisplay.innerHTML = answer;
+            if (parseFloat(b) != 0){
+                let answer = parseFloat(a) / parseFloat(b);
+                bottomDisplay.innerHTML = answer.toFixed(2);
+                } else bottomDisplay.innerHTML = 'Cannot divide by 0';
+                
+                
             if (bottomDisplay.innerHTML === 'NaN') {
                 bottomDisplay.innerHTML = '';
             }
@@ -89,11 +93,6 @@ btn.forEach(individualBtn => {
             if (bottomDisplay.innerHTML === 'NaN') {
                 bottomDisplay.innerHTML = '';
             }
-
-            console.log(numbers);
-            if (operatorArray.length >= 2) {
-
-            };
 
         };
     };
@@ -122,34 +121,36 @@ function refresh() {
 ///////////////////////////KRYBOARD CODE////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////
 
-window.addEventListener('keypress', e => {
+document.addEventListener('keyup', (event) => {
+    let keyName = event.key;
+    let code = event.code;
+    console.log(keyName, code);
 
-    if (e.keyCode >= 112 || e.keyCode <= 95) {
-        console.log(e.keyCode);
-        topDisplay.innerHTML += e.key;
+    topDisplay.innerHTML += keyName;
 
-        if (e.key === 'Enter') {
-            topDisplay.innerHTML = bottomDisplay.innerHTML;
-            bottomDisplay.innerHTML = '';
-        };
-
-    }
-});
-
-window.addEventListener('keypress', function (event) {
-    let key = event.key;
-    if (key === 'Delete') {
-        topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -7);
-        bottomDisplay.innerHTML = '';
+    if (topDisplay.innerHTML.length >= 20) {
+        topDisplay.innerHTML = '';
+        bottomDisplay.innerHTML = 'Number is too long';
     };
 
 
-});
+    if (keyName === 'Backspace'){
+        topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -10);
+        bottomDisplay.innerHTML='';
+    };
 
-window.addEventListener('keypress', keyArray);
-function keyArray() {
+    if (keyName === 'Delete'){
+        topDisplay.innerHTML = topDisplay.innerHTML.slice(0, -7);
+        bottomDisplay.innerHTML='';
+    }
+
+    if (keyName === 'Enter'){
+        topDisplay.innerHTML = bottomDisplay.innerHTML;
+        bottomDisplay.innerHTML='';
+    }
 
     let numbers = topDisplay.innerHTML.split(/[/*+=%-]/g);
+    console.log(numbers);
     let operators = topDisplay.innerHTML.split((/[0123456789]/g));
     let operatorArray = operators.filter(notNull);
 
@@ -160,9 +161,14 @@ function keyArray() {
 
     let a = numbers[0];
     let b = numbers[1];
+    let operator = operatorArray[0];
 
 
-    if (keyCode = 107) {
+
+
+
+    
+    if (operator === '+') {
         let answer = parseFloat(a) + parseFloat(b);
         bottomDisplay.innerHTML = answer;
         if (bottomDisplay.innerHTML === 'NaN') {
@@ -175,7 +181,8 @@ function keyArray() {
             topDisplay.innerHTML = bottomDisplay.innerHTML + y;
         };
 
-    } else if (keyCode = 1095) {
+
+    } else if (operator === '-') {
         let answer = parseFloat(a) - parseFloat(b);
         bottomDisplay.innerHTML = answer;
         if (bottomDisplay.innerHTML === 'NaN') {
@@ -188,7 +195,7 @@ function keyArray() {
             topDisplay.innerHTML = bottomDisplay.innerHTML + y;
         };
 
-    } else if (keyCode = 106) {
+    } else if (operator === '*') {
         let answer = parseFloat(a) * parseFloat(b);
         bottomDisplay.innerHTML = answer;
         if (bottomDisplay.innerHTML === 'NaN') {
@@ -201,9 +208,13 @@ function keyArray() {
             topDisplay.innerHTML = bottomDisplay.innerHTML + y;
         };
 
-    } else if (keyCode = 111) {
+
+    } else if (operator === '/') {
+        if (parseFloat(b) != 0){
         let answer = parseFloat(a) / parseFloat(b);
-        bottomDisplay.innerHTML = answer;
+        bottomDisplay.innerHTML = answer.toFixed(2);
+        } else bottomDisplay.innerHTML = 'Cannot divide by 0';
+
         if (bottomDisplay.innerHTML === 'NaN') {
             bottomDisplay.innerHTML = '';
         }
@@ -213,18 +224,22 @@ function keyArray() {
             let y = operatorArray.pop();
             topDisplay.innerHTML = bottomDisplay.innerHTML + y;
         };
-    } else if (keyCode === 53 && shiftKey === 'true') {
+
+    } else if (operator === '%') {
         let answer = (parseFloat(a) / 100) * parseFloat(b);
         bottomDisplay.innerHTML = answer.toFixed(2);
         if (bottomDisplay.innerHTML === 'NaN') {
             bottomDisplay.innerHTML = '';
         }
+
     };
 
 
 
-    if(topDisplay.innerHTML.length >= 20){
-        topDisplay.innerHTML='';
-        bottomDisplay.innerHTML = 'Number is too long';
-    };
-}
+
+
+
+
+
+}, false);
+
