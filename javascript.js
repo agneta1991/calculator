@@ -15,7 +15,7 @@ btn.forEach(individualBtn => {
 
 
         topDisplay.innerHTML += individualBtn.innerHTML;
-        console.log(topDisplay.innerHTML.split());
+        
         let numbers = topDisplay.innerHTML.split(/[/*+=%-]/g);
         let operators = topDisplay.innerHTML.split((/[0123456789]/g));
         let operatorArray = operators.filter(notNull);
@@ -28,6 +28,11 @@ btn.forEach(individualBtn => {
         let a = numbers[0];
         let b = numbers[1];
         let operator = operatorArray[0];
+
+        let isNegative = Math.sign(topDisplay.innerHTML);
+        if (isNegative<0){
+            console.log('number is negative');
+        }
 
         if (operator === '+') {
             let answer = parseFloat(a) + parseFloat(b);
